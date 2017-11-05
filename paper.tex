@@ -1,0 +1,344 @@
+%%%%%%%%%%%%%%%%%%%% author.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% template for Encyclopedia articles
+%
+%%%%%%%%%%%%%%%% Springer %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% RECOMMENDED %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[graybox, natbib, nosecnum, twocolumn]{svmult}
+\bibpunct{(}{)}{;}{a}{}{,} % suppress commas between author-names and year
+
+% choose options for [] as required from the list
+% in the Reference Guide
+
+\usepackage{mathptmx}       % selects Times Roman as basic font
+\usepackage{helvet}         % selects Helvetica as sans-serif font
+\usepackage{courier}        % selects Courier as typewriter font
+\usepackage{type1cm}        % activate if the above 3 fonts are
+                            % not available on your system
+
+\usepackage{makeidx}         % allows index generation
+\usepackage{graphicx}        % standard LaTeX graphics tool
+                             % when including figure files
+\usepackage{multicol}        % used for the two-column index
+\usepackage[bottom]{footmisc}% places footnotes at page bottom
+\usepackage[normalem]{ulem}	% for strike-through of text with \sout{}  
+\usepackage{hyperref}  %for hyperlinks
+\usepackage{soul}   % for high-lighting of text
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\eat}[1]{}
+\newcommand{\stitle}[1]{\vspace{1.6ex}\noindent{\bf #1}}
+\newcommand{\eetitle}[1]{\vspace{0.8ex}\noindent{\underline{\em #1}}}
+\newcommand{\etitle}[1]{\vspace{0.6ex}\noindent{{\em #1}}}
+
+\begin{document}
+
+\title*{Pattern Matching in Big Graphs}
+% Use \titlerunning{Short Title} for an abbreviated version of
+% your contribution title if the original one is too long
+\author{Yinghui Wu}
+% Use \authorrunning{Short Title} for an abbreviated version of
+% your contribution title if the original one is too long
+\institute{Washington State University, \email{yinghui@eecs.wsu.edu}}
+%
+% Use the package "url.sty" to avoid
+% problems with special characters
+% used in your e-mail or web address
+%
+\maketitle
+
+%\section{Synonyms}
+%Provide synonyms to the article title.
+
+\section{Definition}
+The graph pattern matching problem are to find 
+the answers $Q(G)$ of a pattern query $Q$ in a 
+given graph $G$. The answers are induced by 
+specific query language and 
+ranked by a quality measure. 
+%A function $R$ is optionally used to rank 
+%the quality of the answers. Graph pattern queries 
+The problem can be categorized into three classes~\citep{khan2017big}: 
+(1) Subgraph/supergraph containment query, 
+(2) Graph similarity queries, and
+(3) Graph pattern matching. 
+
+In the context of 
+searching a graph database $D$ 
+that consists of many (small) graph transactions,  
+The graph pattern matching finds the answers $Q(G)$ 
+as a set of graphs from $D$. 
+For subgraph (resp. supergraph containtment) 
+query, it is to find $Q(G)$ that are subgraphs (resp. supergraphs)
+of $Q$. The graph similarity queries are to 
+find $Q(G)$ as all graph transactions that are similar to 
+$Q$ for a particular similarity measure. 
+
+In the context of searching a single 
+graph $G$, graph pattern matching is to 
+find all the occurrences of a query graph $Q$ 
+in a given data graph $G$, specified by a 
+matching function. The remainder of this entry 
+discusses various aspects of 
+graph pattern matching in a single 
+Big graph. 
+
+
+
+%Main Text
+\section{Overview}
+
+This entry discusses foundations  
+of graph pattern matching problem: formal definitions, query languages, 
+and complexity bounds. 
+
+\subsection{Graph pattern queries}
+
+\stitle{Graph pattern query}. A graph pattern query $Q$ 
+is a graph $(V_Q, E_Q, L_Q)$ that consists of 
+a set of pattern node $V_Q$ and pattern edges $E_Q$. 
+For each node $v\in V_Q$ (resp. $e\in E_Q$),  
+a function $L_Q$ assigns search constraints $L(v)$ (resp. $L(e)$)
+for each $v$ (resp. $e$). The constraints $L(\cdot)$ 
+can be expressed as conjunction of 
+relation atoms using variables 
+from node and edge schema, 
+Information retrieval metrics, 
+or regular expressions. 
+
+A data graph $G$=$(V, E, L)$ 
+is a (directed) graph with node set $V$, 
+edge set $E$, and a function $L$ that 
+assigns node and edge content. 
+Given a query $Q$ = $(V_Q, E_Q, L_Q)$, 
+a node $v\in V$ in $G$ with 
+content $L(v)$ (resp. edge $e\in E$ with content $L(e)$) that satisfies 
+the constraint $L(u)$ of a 
+node $u\in V_Q$ (resp. $L(e_u)$ of an edge $e_u\in E_Q$) 
+is a candidate match of $v$ (resp. $e$). 
+
+\stitle{Graph Pattern Matching}. 
+A match $Q(G)$ of a pattern query $Q$ in a data graph $G$ 
+is a substructure of $G$ induced by a matching function 
+$F$. Given a query $Q$=$(V_Q, E_Q, L_Q)$ and a data graph 
+$G$=$(V, E, L)$, the graph pattern matching problem is to 
+find all the matches of $Q$ in $G$. 
+
+Graph pattern matching can be specified by 
+setting the matching function 
+$F$ as a strict subgraph isomorphism, which is an injective function from the nodes 
+in query $Q$ to the nodes in data graph $G$, 
+enforcing a one-to-one matching and label equality 
+between the nodes and edges. 
+
+
+
+\section{Key Research Findings}
+
+\subsection{Relaxation of Graph Pattern Matching} (Yinghui)
+
+\stitle{From edge matching to path matching}. 
+
+\stitle{From matching functions to matching relations}. 
+
+\stitle{From fixed schema to schemaless matching}. 
+
+\subsection{User-friendly Pattern Matching} (Arijit)
+
+\stitle{Graph keyword search}. 
+
+\stitle{Exploratory methods}. QBE.
+
+\subsection{Scalability} (Yinghui)
+Make ``Big Graph'' small. 
+BD-tractability. 
+Bounded evaluability (views; compression; incremental.)
+Parallel scalability;
+
+
+\section{Key Applications}
+
+\section{Future Directions} 
+
+
+
+%This document is intended as a template and guide for the preparation of articles to an encyclopedia, using latex. Contributions should in general follow the usual scheme, "Synonyms, Definitions, Main text (split into various sections with heads and subheads chosen by authors), Conclusions, Cross-references and References", although circumstances might indicate a deviation from this. 
+%{\bf Footnotes should not be used}!
+
+
+
+
+\eat{
+\subsection{Equations}
+\label{subsec:1}
+Use the standard \verb|equation| environment to typeset your equations, e.g.
+%
+\begin{equation}
+a \times b = c\;,
+\end{equation}
+%
+however, for multiline equations we recommend to use the \verb|eqnarray| environment.
+\begin{eqnarray}
+a \times b = c \nonumber\\
+\vec{a} \cdot \vec{b}=\vec{c}
+\label{eq:01}
+\end{eqnarray}
+
+\subsection{Subsection Heading}
+\begin{quotation}
+Please do not use quotation marks when quoting texts! Simply use the \verb|quotation| environment -- it will automatically render Springer's preferred layout.
+\end{quotation}
+
+\section{Lists}
+For typesetting numbered lists we recommend to use the \verb|enumerate| environment -- it will automatically render Springer's preferred layout.
+
+\begin{enumerate}
+\item{Livelihood and survival mobility are oftentimes coutcomes of uneven socioeconomic development.}
+\begin{enumerate}
+\item{Livelihood and survival mobility are oftentimes coutcomes of uneven socioeconomic development.}
+\item{Livelihood and survival mobility are oftentimes coutcomes of uneven socioeconomic development.}
+\end{enumerate}
+\item{Livelihood and survival mobility are oftentimes coutcomes of uneven socioeconomic development.}
+\end{enumerate}
+
+\paragraph{Paragraph Heading} %
+For unnumbered list we recommend to use the \verb|itemize| environment -- it will automatically render Springer's preferred layout.
+
+\begin{itemize}
+\item{Livelihood and survival mobility are oftentimes coutcomes of uneven socioeconomic development, cf. Table~\ref{tab:1}.}
+\begin{itemize}
+\item{Livelihood and survival mobility are oftentimes coutcomes of uneven socioeconomic development.}
+\item{Livelihood and survival mobility are oftentimes coutcomes of uneven socioeconomic development.}
+\end{itemize}
+\item{Livelihood and survival mobility are oftentimes coutcomes of uneven socioeconomic development.}
+\end{itemize}
+
+\section{Tables}
+All tables should have accompanying legends, and corresponding in-text citations need to be provided. A table legend should begin with "Table" (not abbreviated), followed by the number, both in boldface.
+The number is not followed by a period, and the legend has no end-punctuation: Table \ref{tab:1}.
+%
+\begin{table*}
+\caption{Please write your table caption here}
+\label{tab:1}       % Give a unique label
+%
+% Follow this input for your own table layout
+%
+\begin{tabular}{p{2cm}p{2.4cm}p{2cm}p{4.9cm}}
+\hline\noalign{\smallskip}
+Classes & Subclass & Length & Action Mechanism  \\
+\noalign{\smallskip}\svhline\noalign{\smallskip}
+Translation & mRNA$^a$  & 22 (19--25) & Translation repression, mRNA cleavage\\
+Translation & mRNA cleavage & 21 & mRNA cleavage\\
+Translation & mRNA  & 21--22 & mRNA cleavage\\
+Translation & mRNA  & 24--26 & Histone and DNA Modification\\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+\end{tabular}
+$^a$ Table foot note (with superscript)
+\end{table*}
+%
+\section{Figures}
+Color figures can be submitted. The print and electronic publication of the encyclopedia will be in full color. Please submit figures and supplementary materials in their original program format. See also Fig.~\ref{fig:1}.\footnote{If you copy
+text passages, figures, or tables from other works, you must obtain
+\textit{permission} from the copyright holder (usually the original
+publisher). Please enclose the signed permission with the manucript. The
+sources must be acknowledged either in the
+captions, as footnotes or in a separate section of the book.}
+
+
+% For figures use
+%
+\begin{figure}
+% Use the relevant command for your figure-insertion program
+% to insert the figure file.
+% For example, with the graphicx style use
+%\includegraphics[scale=.65]{figure}
+%
+% If no graphics program available, insert a blank space i.e. use
+%\picplace{5cm}{2cm} % Give the correct figure height and width in cm
+%
+\caption{Sample figure.}
+\label{fig:1}       % Give a unique label
+\end{figure}
+
+\section{Definitions}
+If you want to list definitions, we recommend to use the Springer-enhanced \verb|description| environment -- it will automatically render Springer's preferred layout.
+
+\begin{description}[Type 1]
+\item[Type 1]{That addresses central themes pertainng to migration, health, and disease. Wilson discusses the role of human migration in infectious disease distributions and patterns.}
+\item[Type 2]{That addresses central themes pertainng to migration, health, and disease. Wilson discusses the role of human migration in infectious disease distributions and patterns.}
+\end{description}
+
+\subsubsection{Theorems}
+
+\begin{theorem}
+Theorem text goes here.
+\end{theorem}
+%
+% or
+%
+\begin{definition}
+Definition text goes here.
+\end{definition}
+
+\begin{proof}
+%\smartqed
+Proof text goes here.
+\qed
+\end{proof}
+
+\paragraph{Paragraph Heading} %
+%
+% For built-in environments use
+%
+\begin{theorem}
+Theorem text goes here.
+\end{theorem}
+%
+\begin{definition}
+Definition text goes here.
+\end{definition}
+%
+\begin{proof}
+\smartqed
+Proof text goes here.
+\qed
+\end{proof}
+\section{Other Options}
+\runinhead{Run-in Heading Boldface Version} Use the \LaTeX\ automatism for all your citations.
+
+\subruninhead{Run-in Heading Italic Version} Use the \LaTeX\ automatism for all your citations.
+
+\section{Submission of your article} To submit, login at \url{http://meteor.springer.com} with the user/password you should have received from Springer. Please upload the source files required for compilation (.tex, figures, and .bbl if you use bibtex) as well as a {\bf .pdf file of the compiled document}.
+
+\section{Cross-References}
+Please login to Meteor (\url{http://meteor.springer.com}) and download a current table of contents. Include a list of related entries from the encyclopedia in this cross-reference section that may be of further interest to your readers. 
+\section{Citations}
+Citations are in NameYear style using natbib citation commands like {\bf \textbackslash citep\{\}} and {\bf \textbackslash citet\{\}}. The basic \textbackslash cite command works identical to \textbackslash citet. \\
+Some examples of citations are given below:
+
+\begin{itemize}
+\item[-]{Journal article: \citep{Smith99}}
+\item[-]{Book chapter \citep{Aron01} }
+\item[-]{Book, authored: \citep{Brown01}  }
+\item[-]{Proceedings, with an editor:  \citep{Boisnard06}  }
+\item[-]{PhD Thesis: \citep{AlmenaraThesis10} } 
+\end{itemize}
+}
+
+% For bibtex users:
+% For references use the `Springer Basic Style'. 
+\bibliographystyle{spbasic}  %for bibtex
+\bibliography{paper} %for bibtex-example
+
+%For non-Bibtex users:
+%\begin{thebibliography}{99}
+%\bibitem[Aron 2001]{Aron01} Aron J, Blass B (2001) The future of modern genomics. Blackwell, London
+%\bibitem[Brown 2001]{Brown01} Brown B, Aaron M (2001) The politics of nature. In: Smith J (ed) The rise of modern genomics, 3rd edn. Wiley, New York, p 234 -295 
+%\bibitem[Smith 1999] {Smith99} Smith J, Jones M Jr, Houghton L et al (1999) Future of health insurance. N Engl J Med 965:325 -329  
+%\bibitem[South 1999]{South99} South M (1999) The future of genomics. In: Williams H (ed) Proceedings of the genomic researchers, Boston, 1999
+%\end{thebibliography}
+
+\end{document}
